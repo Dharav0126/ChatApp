@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="form-container">
+            <form id="login-form">
+                <h2>Welcome Back!</h2>
+                <p class="subtitle">Please login to your account</p>
+                <div class="input-group">
+                    <label for="email">Username</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p>Don't have an account? <a href="/signup">Signup</a></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: email, password })
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '/dashboard?username=' + email;
+                } else {
+                    alert('Login failed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

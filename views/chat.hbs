@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chitchat</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Container for chat window and messages -->
+    <div class="container chat-container">
+      <header>
+        <h2>Chitchat</h2>
+        <p class="subtitle">Start chatting with your friends now!</p>
+      </header>
+
+      <!-- Chat window where messages will appear -->
+      <div id="chat-window">
+        <ul id="messages"></ul>
+      </div>
+
+      <!-- Chat input and send button -->
+      <form id="chat-form">
+        <input id="message-input" type="text" placeholder="Type your message..." autocomplete="off" required />
+        <button type="submit">➤</button>
+      </form>
+
+      <!-- Footer for copyright -->
+      <footer>
+        <p>© 2024 Chitchat. All Rights Reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Linking the JavaScript file -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const username = new URLSearchParams(window.location.search).get('username');
+    const contact = new URLSearchParams(window.location.search).get('contact');
+    const socket = io();
+
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('message-input');
+      socket.emit('private message', { to: contact, message: input.value });
+      addMessage('sent', input.value);
+      input.value = '';
+    });
+
+    socket.on('private message', function(msg) {
+      if (msg.from === contact) {
+        addMessage('received', msg.message);
+      }
+    });
+
+    function addMessage(type, message) {
+      const item = document.createElement('li');
+      item.className = type;
+      item.textContent = message;
+      document.getElementById('messages').appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    socket.emit('join', username);
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Selection</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="chat-selection-container">
+    <header>
+      <h1>Start a Chat</h1>
+      <p>Select a contact to start a conversation</p>
+    </header>
+
+    <div class="contacts-list" id="contacts-list">
+      <!-- Contacts will be dynamically loaded here -->
+    </div>
+
+    <button id="add-contact-button">Add Contact</button>
+    <div id="add-contact-form" style="display: none;">
+      <input type="text" id="contact-username" placeholder="Enter contact username" required>
+      <button id="submit-contact">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    const username = new URLSearchParams(window.location.search).get('username');
+
+    function loadContacts() {
+      fetch(`/contacts/${username}`)
+        .then(response => response.json())
+        .then(contacts => {
+          const contactsList = document.getElementById('contacts-list');
+          contactsList.innerHTML = '';
+          contacts.forEach(contact => {
+            const contactElement = document.createElement('div');
+            contactElement.className = 'contact';
+            contactElement.innerHTML = `
+              <img src="https://cdn2.iconfinder.com/data/icons/office-and-business-round-set-1/64/12-1024.png" alt="${contact.username}" class="contact-img">
+              <div class="contact-info">
+                <h3 class="contact-name">${contact.username}</h3>
+              </div>
+            `;
+            contactElement.addEventListener('click', () => {
+              window.location.href = `/chat?username=${username}&contact=${contact.username}`;
+            });
+            contactsList.appendChild(contactElement);
+          });
+        });
+    }
+
+    document.getElementById('add-contact-button').addEventListener('click', () => {
+      document.getElementById('add-contact-form').style.display = 'block';
+    });
+
+    document.getElementById('submit-contact').addEventListener('click', () => {
+      const contactUsername = document.getElementById('contact-username').value;
+      fetch('/add-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, contactUsername })
+      }).then(response => {
+        if (response.ok) {
+          loadContacts();
+          document.getElementById('add-contact-form').style.display = 'none';
+          document.getElementById('contact-username').value = '';
+        } else {
+          alert('Failed to add contact');
+        }
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', loadContacts);
+  </script>
+</body>
+</html>
