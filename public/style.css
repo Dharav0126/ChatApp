@@ -30,100 +30,288 @@ body {
     color: #333;
 }
 
-/* Shared Container Styles */
-.container {
-    background: #fff;
-    border-radius: 15px;
-    padding: 40px 30px;
-    max-width: 400px;
+/* Login and signup page design */
+
+/* Login Wrapper */
+.login-wrapper {
     width: 100%;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.chat-container{
-    width: 900px;
+/* Decorative Elements */
+.login-wrapper::before, .login-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 50%;
+    top: -80%;
+    left: -80%;
+    z-index: -1;
+    animation: floating 8s infinite linear;
 }
 
-.container h2 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1d2671;
-    margin-bottom: 10px;
+.login-wrapper::after {
+    background: rgba(74, 144, 226, 0.15);
+    animation: floating 8s infinite linear reverse;
 }
 
-.container p.subtitle {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 30px;
+/* Animation */
+@keyframes floating {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(20px, 20px);
+    }
 }
 
-/* Input Field Styling */
+/* Form Header */
+.form-container h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.form-container .subtitle {
+    margin: 10px 0 20px;
+    font-size: 1.1rem;
+    color: #555;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Input Group */
 .input-group {
     margin-bottom: 20px;
     text-align: left;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .input-group label {
-    font-size: 14px;
-    color: #444;
-    margin-bottom: 5px;
     display: block;
-    font-weight: bold;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 8px;
 }
 
 .input-group input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #f9f9f9;
 }
 
 .input-group input:focus {
-    border-color: #c33764;
-    box-shadow: 0 4px 12px rgba(195, 55, 100, 0.3);
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+    background: #fff;
 }
 
-/* Button Styling */
+/* Button */
 .btn {
+    display: inline-block;
     width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #c33764, #1d2671);
-    color: #fff;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 1rem;
     font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #1d2671, #c33764);
     border: none;
-    border-radius: 25px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
+    transition: background 0.4s, transform 0.2s;
+    animation: fadeIn 2.5s ease-in-out;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, #1d2671, #c33764);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(29, 38, 113, 0.3);
+    background: linear-gradient(135deg, #c33764, #1d2671);
+    transform: translateY(-3px);
 }
 
-/* Footer Links */
-.form-footer {
-    margin-top: 20px;
+/* Signup Link */
+.form-container p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 15px;
+    animation: fadeIn 3s ease-in-out;
 }
 
-.form-footer a {
-    color: #1d2671;
-    font-weight: bold;
+.form-container p a {
+    color: #4a90e2;
     text-decoration: none;
-    transition: color 0.3s ease;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.form-footer a:hover {
-    color: #c33764;
+.form-container p a:hover {
+    color: #357ab8;
 }
 
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .login-wrapper {
+        padding: 20px 25px;
+    }
+
+    .form-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+}
+
+/* Chat Selection Page */
+.chat-selection-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Header Styling */
+.chat-selection-container header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1d2671;
+    margin-bottom: 10px;
+}
+
+.chat-selection-container header p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Contacts List */
+.contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Contact Item */
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contact:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact Image */
+.contact-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #1d2671;
+    object-fit: cover;
+}
+
+/* Contact Info */
+.contact-info {
+    text-align: left;
+}
+
+.contact-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .chat-selection-container {
+        padding: 20px;
+    }
+
+    .contact {
+        padding: 10px;
+    }
+
+    .contact-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .contact-name {
+        font-size: 1rem;
+    }
+}
+
+/* Container for Chat Application */
+.chat-container {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;    
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Section */
+header {
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+}
+
+header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+header .subtitle {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.chatHeader{
+    background: white;
+}
 /* Chat Window */
 #chat-window {
     padding: 20px;
@@ -140,7 +328,7 @@ body {
 }
 
 /* Chat Message Styling */
-.message {
+#message {
     display: flex;
     margin-bottom: 15px;
     padding: 10px;
@@ -150,25 +338,25 @@ body {
     animation: fadeIn 0.5s ease-out;
 }
 
-.message.user-message {
+#message.user-message {
     background-color: #c33764;
     color: white;
     align-self: flex-end;
 }
 
-.message.bot-message {
+#message.bot-message {
     background-color: #e4e9f2;
     color: #333;
     align-self: flex-start;
 }
 
-.message p {
+#message p {
     margin: 0;
     padding: 0;
     font-size: 16px;
 }
 
-.message-time {
+#message-time {
     position: absolute;
     bottom: 5px;
     right: 10px;
@@ -198,125 +386,135 @@ body {
     box-shadow: 0 0 8px rgba(195, 55, 100, 0.3);
 }
 
-button {
-    background: linear-gradient(135deg, #c33764, #1d2671);
-    color: white;
+#chat-form button {
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    color: #ffffff;
     border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    margin-left: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s, transform 0.2s;
 }
 
-button:hover {
-    transform: scale(1.1);
+#chat-form button:hover {
+    background: linear-gradient(135deg, #c33764, #1d2671);
+    transform: translateY(-2px);
 }
 
 /* Footer */
 footer {
-    background: #1d2671;
-    color: white;
     text-align: center;
+    font-size: 0.8rem;
     padding: 10px;
-    font-size: 12px;
+    background: #f7f7f7;
+    border-top: 1px solid #ddd;
+    color: #888;
 }
 
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
+/* Responsive Design */
+@media (max-width: 600px) {
+    .chat-container {
+        max-width: 100%;
+        border-radius: 0;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    #message-input {
+        font-size: 0.9rem;
+    }
+
+    #chat-form button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
     }
 }
 
-.chat-selection-container {
-    background: #fff;
-    border-radius: 15px;
-    padding: 30px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+/* Scrollbar Styling */
+
+.chat-selection-container{
+    background: #fefdfd;
+    padding: 50px;
 }
 
-.chat-selection-container header {
-    text-align: center;
-    margin-bottom: 30px;
+.dashHeader{
+    background: white;
 }
 
-.chat-selection-container header h1 {
-    font-size: 28px;
-    color: #1d2671;
-}
-
-.chat-selection-container header p {
-    font-size: 14px;
-    color: #777;
-}
-
-/* Contact List Styling */
-.contacts-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.contact {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
+#add-contact-button{
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    color: #fff;
+    border: none;
     border-radius: 10px;
-    transition: all 0.3s ease;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.contacts-list {
+    max-height: 400px; /* Limit height to prevent overflow */
+    overflow-y: auto;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #c33764 #f9f9f9;
 }
 
-.contact:hover {
-    background-color: #f1f1f1;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.contacts-list::-webkit-scrollbar {
+    width: 8px;
 }
 
-.contact-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
+.contacts-list::-webkit-scrollbar-thumb {
+    background-color: #c33764;
+    border-radius: 10px;
 }
 
-.contact-info {
+.contacts-list::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
+/* Add Contact Form Styling */
+#add-contact-form {
+    margin-top: 15px;
     display: flex;
-    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
-.contact-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+#contact-username {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+    transition: border-color 0.3s;
 }
 
-.contact-status {
-    font-size: 14px;
-    color: #aaa;
+#contact-username:focus {
+    border-color: #c33764;
+    box-shadow: 0 0 5px rgba(195, 55, 100, 0.3);
 }
 
-.contact-status.online {
-    color: #34b74e;
+#submit-contact {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 
-.contact-status.offline {
-    color: #d9534f;
+#submit-contact:hover {
+    background: linear-gradient(135deg, #c33764, #1d2671);
+    transform: translateY(-2px);
 }
 
-/* Hover Effects */
-.contact:hover .contact-name {
-    color: #1d2671;
+/* Smooth Toggle Transition */
+#add-contact-form {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scaleY(0);
 }
 
-.contact:hover .contact-status {
-    color: #1d2671;
+#add-contact-form[style*="display: block"] {
+    opacity: 1;
+    transform: scaleY(1);
 }

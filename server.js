@@ -43,6 +43,11 @@ app.get('/chat', (req, res) => {
     res.render('chat', { contact });
 });
 
+app.get('/chat-contact', (req, res) => {
+    const { contact } = req.query;
+    res.render('chat-contact', { contact });
+});
+
 app.post('/signup', async (req, res) => {
     const { username, password } = req.body;
     try {
